@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //console.log('move right');
 
     for (let i = 0; i < squares.length; i++) {
-      console.log(i);
+      //console.log(i);
 
       if (i % 4 === 0) {
         let totalOne = squares[i].innerHTML;
@@ -40,8 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
         let totalThree = squares[i + 2].innerHTML;
         let totalOFour = squares[i + 3].innerHTML;
 
-        let row = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalOFour)];
-        console.log(row);
+        let row = [
+          parseInt(totalOne),
+          parseInt(totalTwo),
+          parseInt(totalThree),
+          parseInt(totalOFour),
+        ];
+        //console.log(row);
 
         let filteredRow = row.filter((num) => num != 0);
         let remainZeros = 4 - filteredRow.length;
@@ -57,12 +62,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    generate();
+    
   }
 
   function combineRows() {
-    for(let i = 0; i < 15; i++) {
-        
+    //console.log('combine rows');
+    
+    for (let i = 0; i < 15; i++) {
+      if (squares[i].innerHTML === squares[i + 1].innerHTML) {
+        squares[i + 1].innerHTML =
+          parseInt(squares[i].innerHTML) + parseInt(squares[i + 1].innerHTML);
+        squares[i].innerHTML = '0';
+      }
     }
   }
 
@@ -70,16 +81,14 @@ document.addEventListener("DOMContentLoaded", () => {
     moveRight();
     combineRows();
     moveRight();
-    generate()
+    generate();
   }
 
   function handleKey(e) {
-    if(e.key === 'ArrowRight') {
-        keyRight();
+    if (e.key === "ArrowRight") {
+      keyRight();
     }
   }
 
-  document.addEventListener('keydown', handleKey);
-
-
+  document.addEventListener("keydown", handleKey);
 });
