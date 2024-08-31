@@ -180,6 +180,9 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreDisplay.innerText = score;
       }
     }
+
+    winGame();
+    loseGame();
   }
 
   function combineCols() {
@@ -198,6 +201,9 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreDisplay.innerText = score;
       }
     }
+
+    winGame();
+    loseGame();
   }
 
   function keyRight() {
@@ -235,8 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
       keyLeft();
     } else if (e.key === "ArrowUp") {
       keyUp();
-    }
-    else if(e.key === 'ArrowDown') {
+    } else if (e.key === "ArrowDown") {
       keyDown();
     }
   }
@@ -244,22 +249,45 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", handleKey);
 
   function colorTiles() {
-    for(let square of squares) {
-      if(square.innerHTML == 0) square.style.backgroundColor = '#697565';
-      if(square.innerHTML == 2) square.style.backgroundColor = '#F5F5F5';
-      if(square.innerHTML == 4) square.style.backgroundColor = '#98DED9';
-      if(square.innerHTML == 8) square.style.backgroundColor = '#FFDC7F';
-      if(square.innerHTML == 16) square.style.backgroundColor = '#FF9874';
-      if(square.innerHTML == 32) square.style.backgroundColor = '#F05A7E';
-      if(square.innerHTML == 64) square.style.backgroundColor = '#FABC3F';
-      if(square.innerHTML == 128) square.style.backgroundColor = '#697565';
-      if(square.innerHTML == 256) square.style.backgroundColor = '#697565';
-      if(square.innerHTML == 512) square.style.backgroundColor = '#697565';
-      if(square.innerHTML == 1024) square.style.backgroundColor = '#697565';
-      if(square.innerHTML == 2048) square.style.backgroundColor = '#697565';
+    for (let square of squares) {
+      if (square.innerHTML == 0) square.style.backgroundColor = "#697565";
+      if (square.innerHTML == 2) square.style.backgroundColor = "#F5F5F5";
+      if (square.innerHTML == 4) square.style.backgroundColor = "#98DED9";
+      if (square.innerHTML == 8) square.style.backgroundColor = "#FFDC7F";
+      if (square.innerHTML == 16) square.style.backgroundColor = "#FF9874";
+      if (square.innerHTML == 32) square.style.backgroundColor = "#F05A7E";
+      if (square.innerHTML == 64) square.style.backgroundColor = "#FABC3F";
+      if (square.innerHTML == 128) square.style.backgroundColor = "#E2BFD9";
+      if (square.innerHTML == 256) square.style.backgroundColor = "#B4E380";
+      if (square.innerHTML == 512) square.style.backgroundColor = "#F3FEB8";
+      if (square.innerHTML == 1024) square.style.backgroundColor = "#BBE9FF";
+      if (square.innerHTML == 2048) square.style.backgroundColor = "#FF7F3E";
     }
   }
 
+  function winGame() { 
+    for (let square of squares) {
+      if (square.innerHTML == 2048) {
+        document.removeEventListener("keydown", handleKey);
+        clearInterval(colorInterval);
+        result.innerHTML = "You WIN!";
+      }
+    }
+  }
 
-  setInterval(colorTiles, 50);
+  function loseGame() {
+    console.log('lose game');
+    
+    for (let square of squares) {
+      if (square.innerHTML == 0) {
+        return;
+      }
+    }
+
+    document.removeEventListener("keydown", handleKey);
+    clearInterval(colorInterval);
+    result.innerHTML = "GAME OVER!";
+  }
+
+  let colorInterval = setInterval(colorTiles, 50);
 });
