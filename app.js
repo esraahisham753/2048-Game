@@ -250,18 +250,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function colorTiles() {
     for (let square of squares) {
-      if (square.innerHTML == 0) square.style.backgroundColor = "#697565";
-      if (square.innerHTML == 2) square.style.backgroundColor = "#F5F5F5";
-      if (square.innerHTML == 4) square.style.backgroundColor = "#98DED9";
-      if (square.innerHTML == 8) square.style.backgroundColor = "#FFDC7F";
-      if (square.innerHTML == 16) square.style.backgroundColor = "#FF9874";
-      if (square.innerHTML == 32) square.style.backgroundColor = "#F05A7E";
-      if (square.innerHTML == 64) square.style.backgroundColor = "#FABC3F";
-      if (square.innerHTML == 128) square.style.backgroundColor = "#E2BFD9";
-      if (square.innerHTML == 256) square.style.backgroundColor = "#B4E380";
-      if (square.innerHTML == 512) square.style.backgroundColor = "#F3FEB8";
-      if (square.innerHTML == 1024) square.style.backgroundColor = "#BBE9FF";
-      if (square.innerHTML == 2048) square.style.backgroundColor = "#FF7F3E";
+      const value = square.innerHTML;
+      square.dataset.value = value === "0" ? "" : value;
+      square.style.color = "transparent";
+      if (value === "0") {
+        square.style.backgroundColor = "transparent";
+        square.style.border = "none";
+        square.style.boxShadow = "none";
+      } else {
+        square.style.border = "2px solid rgba(105, 255, 164, 0.2)";
+        square.style.boxShadow = "inset 0 0 12px rgba(0, 0, 0, 0.22)";
+      }
+      if (value == 2) square.style.backgroundColor = "#11223a";
+      if (value == 4) square.style.backgroundColor = "#143548";
+      if (value == 8) square.style.backgroundColor = "#2f4b68";
+      if (value == 16) square.style.backgroundColor = "#5b4f8c";
+      if (value == 32) square.style.backgroundColor = "#8f436a";
+      if (value == 64) square.style.backgroundColor = "#c46340";
+      if (value == 128) square.style.backgroundColor = "#cca957";
+      if (value == 256) square.style.backgroundColor = "#65a85f";
+      if (value == 512) square.style.backgroundColor = "#89ce6a";
+      if (value == 1024) square.style.backgroundColor = "#8c7bdd";
+      if (value == 2048) square.style.backgroundColor = "#ff7f3a";
     }
   }
 
